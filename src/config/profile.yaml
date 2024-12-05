@@ -2,7 +2,7 @@
 
 # Personal Info
 personal:
-  avatar: '/assets/avatar.jpg'  # Path to your avatar image
+  avatar: '/assets/IMG_3513.jpeg'  # Path to your avatar image
   name: 'Steven Lynn'
   description: 'AI Dev & Technical Writer'
   email: 'stvlynn@dify.ai'  # Optional
@@ -63,5 +63,5 @@ links:
   items:
     - name: 'Blog'
       url: 'https://blog.stv.pm'
-      avatar: '/assets/blog-avatar.png'
+      avatar: '/assets/IMG_3513.jpeg'
       position: 4
