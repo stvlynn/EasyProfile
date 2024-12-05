@@ -1,0 +1,68 @@
+# Profile Configuration
+
+# Personal Info
+personal:
+  avatar: '/assets/avatar.jpg'  # Path to your avatar image
+  name: 'John Doe'
+  description: 'Full Stack Developer & Open Source Enthusiast'
+  email: 'john@example.com'  # Optional
+  phone: '+1 234 567 890'    # Optional
+  social:
+    github: 'johndoe'        # Optional
+    twitter: 'johndoe'       # Optional
+    linkedin: 'johndoe'      # Optional
+    facebook: 'johndoe'      # Optional
+    telegram: 'johndoe'      # Optional
+  position: 0
+
+# About Me
+about:
+  title: '个人简介'
+  description: '热衷于开源项目和新技术探索的全栈开发者。专注于构建高性能、可扩展的web应用。在过去的5年中，参与并领导了多个大型项目的开发工作。'
+  position: 1
+
+# Technical Skills
+skills:
+  title: '技术能力'
+  abilities:
+    - vuejs
+    - python
+    - nodejs
+    - docker
+    - kubernetes
+    - golang
+  position: 2
+
+# Projects
+projects:
+  title: '项目'
+  items:
+    - title: '个人导航页'
+      description: '使用Vue3和TailwindCSS开发的响应式个人主页'
+      tags: ['Vue3', 'TailwindCSS', 'YAML']
+    - title: '开源项目管理系统'
+      description: '基于Python和Vue的项目管理系统，支持多人协作'
+      tags: ['Python', 'Vue', 'PostgreSQL']
+  position: 3
+
+# Education (Optional)
+education:
+  title: '教育经历'
+  items:
+    - school: '示例大学'
+      time: '2015-2019'
+    - school: '示例研究生院'
+      time: '2019-2022'
+  position: 0
+
+# Links (Optional)
+links:
+  title: '链接'
+  items:
+    - name: '个人博客'
+      url: 'https://blog.example.com'
+      avatar: '/assets/blog-avatar.png'
+    - name: '技术社区'
+      url: 'https://community.example.com'
+      avatar: 'https://community.example.com/avatar.png'
+  position: 4
