@@ -3,46 +3,48 @@
 # Personal Info
 personal:
   avatar: '/assets/avatar.jpg'  # Path to your avatar image
-  name: 'John Doe'
-  description: 'Full Stack Developer & Open Source Enthusiast'
-  email: 'john@example.com'  # Optional
-  phone: '+1 234 567 890'    # Optional
+  name: 'Steven Lynn'
+  description: 'AI Dev & Technical Writer'
+  email: 'stvlynn@dify.ai'  # Optional
+  phone: ''    # Optional
   social:
-    github: 'johndoe'        # Optional
-    twitter: 'johndoe'       # Optional
-    linkedin: 'johndoe'      # Optional
-    facebook: 'johndoe'      # Optional
-    telegram: 'johndoe'      # Optional
+    github: 'stvlynn'        # Optional
+    twitter: 'stv_lynn'       # Optional
+    linkedin: ''      # Optional
+    facebook: ''      # Optional
+    telegram: 'stvlynn'      # Optional
   position: 0
 
 # About Me
 about:
-  title: '个人简介'
-  description: '热衷于开源项目和新技术探索的全栈开发者。专注于构建高性能、可扩展的web应用。在过去的5年中，参与并领导了多个大型项目的开发工作。'
+  title: 'Intro'
+  description: 'A university student. Intership @Dify. Focusing on LLM agents development.'
   position: 1
 
 # Technical Skills
 skills:
-  title: '技术能力'
+  title: 'Skills'
   abilities:
     - vuejs
     - python
-    - nodejs
+    - matlab
     - docker
-    - kubernetes
-    - golang
+    - linux
   position: 2
 
 # Projects
 projects:
-  title: '项目'
+  title: 'Projects'
   items:
-    - title: '个人导航页'
-      description: '使用Vue3和TailwindCSS开发的响应式个人主页'
-      tags: ['Vue3', 'TailwindCSS', 'YAML']
-    - title: '开源项目管理系统'
-      description: '基于Python和Vue的项目管理系统，支持多人协作'
-      tags: ['Python', 'Vue', 'PostgreSQL']
+    - title: 'Twi.am - Twitter MBTI Receipt'
+      description: 'A website generates receipt-style analysis of your MBTI using data scraped from twitter profile.'
+      tags: ['Vue3', 'TailwindCSS', 'LLM']
+    - title: 'EasyReceipt'
+      description: 'An iOS APP that helps you scan receipts using LLM vision and sync to Feishu.'
+      tags: ['Swift', 'LLM']
+    - title: 'Reflection-Chinese-32B'
+      description: 'A fine-tuned LLM with CoT.'
+      tags: ['LLM']
   position: 3
 
 # Education (Optional)
@@ -57,12 +59,9 @@ education:
 
 # Links (Optional)
 links:
-  title: '链接'
+  title: 'Link'
   items:
-    - name: '个人博客'
-      url: 'https://blog.example.com'
+    - name: 'Blog'
+      url: 'https://blog.stv.pm'
       avatar: '/assets/blog-avatar.png'
-    - name: '技术社区'
-      url: 'https://community.example.com'
-      avatar: 'https://community.example.com/avatar.png'
-  position: 4
+      position: 4
