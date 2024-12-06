@@ -56,17 +56,20 @@
         </div>
       </div>
     </div>
+    <Footer :config="config" />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import config from './config/config.yaml'
 import ProfileCard from './components/ProfileCard.vue'
 import AboutCard from './components/AboutCard.vue'
 import SkillsCard from './components/SkillsCard.vue'
 import ProjectsCard from './components/ProjectsCard.vue'
 import EducationCard from './components/EducationCard.vue'
 import LinksCard from './components/LinksCard.vue'
+import Footer from './components/Footer.vue'
 import { useDarkMode } from './composables/useDarkMode'
 import profileData from './config/config.yaml'
 

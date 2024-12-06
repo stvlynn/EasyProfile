@@ -1,86 +1,94 @@
 # EasyProfile
 
-一个使用Vue 3和TailwindCSS构建的个人导航页面，支持通过YAML配置内容。
+A personal navigation page built with Vue 3 and TailwindCSS, featuring YAML-based configuration.
 
-## 特性
+[中文文档](./README-cn.md)
 
-- 响应式设计
-- 使用YAML配置内容
-- 支持社交媒体链接
-- Font Awesome图标支持
-- 卡片式布局
-- 技能标签自动图标
+## Features
 
-## 开始使用
+- Responsive design
+- YAML-driven configuration
+- Social media integration
+- Font Awesome icon support
+- Card-based layout
+- Automatic skill tag icons
+- Dark mode support
+- Server-side rendering (SSR)
+- OpenGraph meta tags support
 
-1. 安装依赖：
-```bash
-npm install
+## Getting Started
+
+0. Star this project ⭐️
+
+1. Deploy this project to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fstvlynn%2FEasyProfile)
+
+2. Edit `src/config/config.yaml` to customize your profile
+
+## Configuration
+
+### Configuration Files
+
+The project includes two main configuration files:
+
+1. `src/config/config.yaml`: Main configuration file for personal info, skills, projects, etc.
+2. `src/config/icons.yaml`: Icon configuration file defining available icons for skills and project tags
+
+### Personal Information
+Edit the following section in `config.yaml`:
+```yaml
+personal:
+  avatar: '/assets/avatar.jpg'  # Avatar image path
+  name: 'Your Name'
+  description: 'Short description'
+  email: 'your.email@example.com'  # Optional
+  phone: ''                        # Optional
+  social:                          # Optional social media links
+    github: 'username'
+    twitter: 'username'
+    linkedin: 'username'
+    facebook: 'username'
+    telegram: 'username'
 ```
 
-2. 开发模式运行：
-```bash
-npm run dev
+### Technical Skills
+Edit the skills section in `config.yaml`:
+```yaml
+skills:
+  title: 'Skills'
+  abilities:
+    - name: 'python'      # Technology name
+      level: 3           # 3 = Advanced, 2 = Intermediate, 1 = Beginner
 ```
 
-3. 构建生产版本：
-```bash
-npm run build
-```
+### Icon Configuration
+`icons.yaml` defines available icons for skills and project tags, supporting two types:
+- Technology stack: vuejs, react, angular, nodejs, python, java, etc.
+- Domains: machine-learning, frontend, backend, database, etc.
 
-## 配置说明
+Using these names as skill or project tags will automatically display the corresponding icons, others will show a default icon.
 
-编辑 `src/config/config.yaml` 文件来自定义你的个人信息：
+### Card Positioning
 
-### 个人信息
-- avatar: 头像图片路径
-- name: 姓名
-- description: 简短描述
-- email: 电子邮件（可选）
-- phone: 电话号码（可选）
-- social: 社交媒体链接（可选）
-  - github
-  - twitter
-  - linkedin
-  - facebook
-  - telegram
+Each card's `position` determines its placement on the page:
 
-### 技术能力
-支持的技术标签（自动显示对应图标）：
-- vuejs
-- react
-- angular
-- nodejs
-- python
-- java
-- cpp
-- golang
-- docker
-- kubernetes
+- `position: 1`: First card in the left column
+- `position: 2`: First card in the right column
+- `position: 3`: Second card in the left column
+- `position: 4`: Second card in the right column
 
-其他技术标签会显示默认图标。
+And so on. Odd positions are in the left column, even positions in the right column. Set `position` to 0 or negative to hide a card.
 
-### 卡片位置
+## Customization
 
-每个卡片的`position`变量决定了卡片在页面中的显示位置:
-
-- `position: 1`：左列第一个卡片
-- `position: 2`：右列第一个卡片
-- `position: 3`：左列第二个卡片
-- `position: 4`：右列第二个卡片
-
-以此类推。奇数位置在左列，偶数位置在右列。将`position`设置为0或负数可以隐藏卡片。
-
-## 自定义主题
-
-编辑 `tailwind.config.js` 文件来自定义颜色和其他主题选项。
+Edit `tailwind.config.js` to customize colors and other theme options.
 
 ## Sponsoring
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/stvlynn)
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/stvlynn)
-
 
 ETH: 0xEbf67cd24fa23fde69843cA4119cE946d8c231F5
 

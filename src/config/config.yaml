@@ -14,6 +14,13 @@ theme:
 site:
   title: "Steven Lynn's Profile"  # Browser tab title
   favicon: "/favicon.ico"         # Path to favicon file (in public directory)
+  repo: "stvlynn/EasyProfile"    # GitHub repository name
+  badges:                        # Social badges configuration
+    buymeacoffee:
+      slug: "stvlynn"           # Your buymeacoffee username
+      color: "#FFDD00"          # Button color
+    twitter:
+      username: "stv_lynn"       # Your Twitter username
 
 # OpenGraph Meta Configuration
 og:
