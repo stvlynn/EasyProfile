@@ -10,7 +10,7 @@
     "dev": "node server",
     "build": "vite build",
     "preview": "vite preview",
-    "vercel-build": "vite build && cp -r public/* dist/"
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",

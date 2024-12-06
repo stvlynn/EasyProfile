@@ -1,21 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "^/assets/(.*)",
-      "dest": "/assets/$1",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
+      "dest": "/assets/$1"
     },
     {
       "handle": "filesystem"
