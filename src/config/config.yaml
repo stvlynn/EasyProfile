@@ -36,7 +36,7 @@ og:
 
 # Personal Info
 personal:
-  avatar: '/public/assets/IMG_3513.jpeg'  
+  avatar: '/assets/IMG_3513.jpeg'  
   name: 'Steven Lynn'
   description: 'AI Dev & Technical Writer'
   email: 'i@stv.pm'  # Optional
@@ -136,5 +136,5 @@ links:
   items:
     - name: 'Blog'
       url: 'https://blog.stv.pm'
-      avatar: '/public/assets/IMG_3513.jpeg'
+      avatar: '/assets/IMG_3513.jpeg'
   position: 4

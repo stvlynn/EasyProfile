@@ -27,7 +27,7 @@
 
         <!-- Profile Card -->
         <div>
-          <ProfileCard :profile="profile.personal" :isDark="isDark" />
+          <ProfileCard :profile="profile.personal" :isDark="isDark" :config="profile" />
         </div>
 
         <!-- Main Content -->
@@ -39,7 +39,7 @@
               <SkillsCard v-if="card.type === 'skills'" :skills="profile.skills" :isDark="isDark" />
               <ProjectsCard v-if="card.type === 'projects'" :projects="profile.projects" :isDark="isDark" />
               <EducationCard v-if="card.type === 'education'" :education="profile.education" :isDark="isDark" />
-              <LinksCard v-if="card.type === 'links'" :links="profile.links" :isDark="isDark" />
+              <LinksCard v-if="card.type === 'links'" :links="profile.links" :isDark="isDark" :config="profile" />
             </template>
           </div>
 
@@ -50,7 +50,7 @@
               <SkillsCard v-if="card.type === 'skills'" :skills="profile.skills" :isDark="isDark" />
               <ProjectsCard v-if="card.type === 'projects'" :projects="profile.projects" :isDark="isDark" />
               <EducationCard v-if="card.type === 'education'" :education="profile.education" :isDark="isDark" />
-              <LinksCard v-if="card.type === 'links'" :links="profile.links" :isDark="isDark" />
+              <LinksCard v-if="card.type === 'links'" :links="profile.links" :isDark="isDark" :config="profile" />
             </template>
           </div>
         </div>

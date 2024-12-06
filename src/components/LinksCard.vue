@@ -45,11 +45,15 @@ defineProps({
   isDark: {
     type: Boolean,
     default: false
+  },
+  config: {
+    type: Object,
+    default: () => ({})
   }
 })
 
 const handleImageError = (e) => {
-  e.target.src = '/assets/avatar.jpg'
+  e.target.src = props.config.personal.avatar
 }
 </script>
 
