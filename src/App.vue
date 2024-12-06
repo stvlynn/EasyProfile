@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    <Footer :config="config" />
+    <Footer :config="profile" />
   </div>
 </template>
 
@@ -71,15 +71,20 @@ import EducationCard from './components/EducationCard.vue'
 import LinksCard from './components/LinksCard.vue'
 import Footer from './components/Footer.vue'
 import { useDarkMode } from './composables/useDarkMode'
+import { useAnalytics } from './composables/useAnalytics'
 import profileData from './config/config.yaml'
 
 const profile = ref(profileData)
 const loading = ref(false)
 const error = ref(null)
 
-// Dark mode setup
-const { isDark, updateDarkMode } = useDarkMode(profile.value)
+// Initialize dark mode
+const { isDark } = useDarkMode(profile)
 
+// Initialize analytics
+useAnalytics(profile.value)
+
+// Dark mode toggle handler
 const toggleDarkMode = () => {
   if (profile.value.theme?.darkMode?.auto) {
     // If auto mode is enabled, disable it first

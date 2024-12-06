@@ -35,6 +35,18 @@
 1. `src/config/config.yaml`：主配置文件，用于设置个人信息、技能、项目等内容
 2. `src/config/icons.yaml`：图标配置文件，定义了技能标签和项目标签可用的图标映射
 
+### 站点配置
+编辑 `config.yaml` 中的以下部分：
+```yaml
+site:
+  title: "你的个人主页"         # 浏览器标签标题
+  favicon: "/favicon.ico"      # 网站图标路径
+  analytics:
+    google:
+      id: "G-XXXXXXXXXX"      # 你的 Google Analytics ID
+      enabled: true           # 设置为 true 开启访问统计
+```
+
 ### 个人信息
 编辑 `config.yaml` 中的以下部分：
 ```yaml

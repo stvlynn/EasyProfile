@@ -47,6 +47,22 @@ async function createServer() {
         '<link rel="icon" type="image/svg+xml" href="/vite.svg" />',
         `<link rel="icon" href="${config.site.favicon}" />`
       )
+
+      // Add Google Analytics if enabled
+      const gaScript = config.site.analytics?.google?.enabled && config.site.analytics?.google?.id
+        ? `<!-- Google tag (gtag.js) -->
+           <script async src="https://www.googletagmanager.com/gtag/js?id=${config.site.analytics.google.id}"></script>
+           <script>
+             window.dataLayer = window.dataLayer || [];
+             function gtag(){dataLayer.push(arguments);}
+             gtag('js', new Date());
+             gtag('config', '${config.site.analytics.google.id}');
+           </script>`
+        : ''
+
+      // Insert GA script before </head>
+      template = template.replace('</head>', `${gaScript}</head>`)
+
       template = template.replace(
         '<meta property="og:description" content="Steven Lynn\'s About Page">',
         `<meta property="og:description" content="${config.og.description}">`

@@ -21,6 +21,10 @@ site:
       color: "#FFDD00"          # Button color
     twitter:
       username: "stv_lynn"       # Your Twitter username
+  analytics:                     # Analytics configuration
+    google:
+      id: ""                    # Your Google Analytics ID (e.g., G-XXXXXXXXXX)
+      enabled: false            # Set to true to enable Google Analytics
 
 # OpenGraph Meta Configuration
 og:

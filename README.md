@@ -18,7 +18,7 @@ A personal navigation page built with Vue 3 and TailwindCSS, featuring YAML-base
 
 ## Getting Started
 
-0. Star this project ⭐️
+0. Star this project 
 
 1. Deploy this project to Vercel
 
@@ -34,6 +34,18 @@ The project includes two main configuration files:
 
 1. `src/config/config.yaml`: Main configuration file for personal info, skills, projects, etc.
 2. `src/config/icons.yaml`: Icon configuration file defining available icons for skills and project tags
+
+### Site Configuration
+Edit the following section in `config.yaml`:
+```yaml
+site:
+  title: "Your Profile"          # Browser tab title
+  favicon: "/favicon.ico"        # Favicon path
+  analytics:
+    google:
+      id: "G-XXXXXXXXXX"        # Your Google Analytics ID
+      enabled: true             # Set to true to enable tracking
+```
 
 ### Personal Information
 Edit the following section in `config.yaml`:
