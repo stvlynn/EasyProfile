@@ -1,14 +1,14 @@
 # Profile Configuration
 
-# Dark Mode Settings
-dark_mode:
-  enabled: true                  # Enable/disable dark mode feature
-  auto_detect: true              # Automatically detect dark mode
-  detection_method: 'system'     # Options: 'system', 'time'
-  time_range:                    # Only used if detection_method is 'time'
-    start: '20:00'               # Start of dark mode (8 PM)
-    end: '06:00'                 # End of dark mode (6 AM)
-  default_theme: 'light'         # Fallback theme if auto-detect is off
+# Theme Settings
+theme:
+  darkMode:
+    enabled: true                # Enable/disable dark mode feature
+    auto: true                  # Enable auto dark mode
+    type: 'system'             # 'system' for browser preference, 'time' for time-based
+    timeRange:                  # Only used when type is 'time'
+      start: '19:00'           # Dark mode start time (24-hour format)
+      end: '07:00'             # Dark mode end time (24-hour format)
 
 # Personal Info
 personal:
@@ -86,7 +86,7 @@ education:
       time: '2015-2019'
     - school: '示例研究生院'
       time: '2019-2022'
-  position: 0
+  position: 4
 
 # Links (Optional)
 links:
