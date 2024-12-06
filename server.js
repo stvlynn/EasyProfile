@@ -45,7 +45,7 @@ async function createServer() {
       )
       template = template.replace(
         '<link rel="icon" type="image/svg+xml" href="/vite.svg" />',
-        `<link rel="icon" href="${config.site.favicon}" />`
+        `<link rel="icon" href="/assets/${config.site.favicon}" />`
       )
 
       // Add Google Analytics if enabled
