@@ -26,7 +26,7 @@
             </a>
           </div>
         </div>
-        <div class="mt-4 flex justify-center sm:justify-start space-x-4">
+        <div class="mt-4 flex justify-center sm:justify-start space-x-4 flex-wrap">
           <a
             v-if="profile?.social?.github"
             :href="'https://github.com/' + profile.social.github"
@@ -66,6 +66,78 @@
             class="social-link"
           >
             <i class="fab fa-telegram text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.instagram"
+            :href="'https://instagram.com/' + profile.social.instagram"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fab fa-instagram text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.youtube"
+            :href="'https://youtube.com/@' + profile.social.youtube"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fab fa-youtube text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.medium"
+            :href="'https://medium.com/@' + profile.social.medium"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fab fa-medium text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.reddit"
+            :href="'https://reddit.com/user/' + profile.social.reddit"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fab fa-reddit text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.discord"
+            :href="'https://discord.com/users/' + profile.social.discord"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fab fa-discord text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.weibo"
+            :href="'https://weibo.com/' + profile.social.weibo"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fab fa-weibo text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.zhihu"
+            :href="'https://zhihu.com/people/' + profile.social.zhihu"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fas fa-book-reader text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.bilibili"
+            :href="'https://space.bilibili.com/' + profile.social.bilibili"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fab fa-bilibili text-xl"></i>
+          </a>
+          <a
+            v-if="profile?.social?.huggingface"
+            :href="'https://huggingface.co/' + profile.social.huggingface"
+            target="_blank"
+            class="social-link"
+          >
+            <i class="fi fi-ss-face-smiling-hands text-xl"></i>
           </a>
         </div>
       </div>

@@ -1,5 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-light-primary dark:bg-dark-primary text-light-primary dark:text-dark-primary transition-colors duration-300">
+    <DarkModeToggle :config="darkModeConfig" />
     <div class="max-w-7xl mx-auto">
       <div v-if="error" class="text-red-500 text-center py-4">
         {{ error }}
@@ -43,18 +44,30 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import yaml from 'js-yaml'
 import ProfileCard from './components/ProfileCard.vue'
 import AboutCard from './components/AboutCard.vue'
 import SkillsCard from './components/SkillsCard.vue'
 import ProjectsCard from './components/ProjectsCard.vue'
 import EducationCard from './components/EducationCard.vue'
 import LinksCard from './components/LinksCard.vue'
+import DarkModeToggle from './components/DarkModeToggle.vue'
 import profileData from './config/profile.yaml'
 
 const profile = ref(profileData)
 const loading = ref(false)
 const error = ref(null)
+const darkModeConfig = ref({})
+
+onMounted(async () => {
+  try {
+    // Extract dark mode config
+    darkModeConfig.value = profileData.dark_mode || {}
+  } catch (error) {
+    console.error('Error loading configuration:', error)
+  }
+})
 
 // 获取所有卡片配置
 const cards = computed(() => {
@@ -81,3 +94,10 @@ const rightColumnCards = computed(() => {
   return cards.value.filter(card => card.data.position % 2 === 0)
 })
 </script>
+
+<style>
+/* Global dark mode transitions */
+body {
+  @apply transition-colors duration-300;
+}
+</style>

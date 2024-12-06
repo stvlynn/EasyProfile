@@ -1,5 +1,15 @@
 # Profile Configuration
 
+# Dark Mode Settings
+dark_mode:
+  enabled: true                  # Enable/disable dark mode feature
+  auto_detect: true              # Automatically detect dark mode
+  detection_method: 'system'     # Options: 'system', 'time'
+  time_range:                    # Only used if detection_method is 'time'
+    start: '20:00'               # Start of dark mode (8 PM)
+    end: '06:00'                 # End of dark mode (6 AM)
+  default_theme: 'light'         # Fallback theme if auto-detect is off
+
 # Personal Info
 personal:
   avatar: '/assets/IMG_3513.jpeg'  # Path to your avatar image
@@ -9,10 +19,19 @@ personal:
   phone: ''    # Optional
   social:
     github: 'stvlynn'        # Optional
-    twitter: 'stv_lynn'       # Optional
-    linkedin: ''      # Optional
-    facebook: ''      # Optional
+    twitter: 'stv_lynn'      # Optional
+    linkedin: ''             # Optional
+    facebook: ''             # Optional
     telegram: 'stvlynn'      # Optional
+    instagram: ''            # Optional
+    youtube: ''             # Optional
+    medium: ''              # Optional
+    reddit: ''              # Optional
+    discord: ''             # Optional
+    weibo: ''               # Optional
+    zhihu: ''               # Optional
+    bilibili: ''            # Optional
+    huggingface: 'stvlynn'         # Optional
   position: 0
 
 # About Me
@@ -25,11 +44,20 @@ about:
 skills:
   title: 'Skills'
   abilities:
-    - vuejs
-    - python
-    - matlab
-    - docker
-    - linux
+    - name: vuejs      # Frontend framework, used in multiple personal projects
+      level: Advanced  # Proficient in Vue 3, Composition API, and TailwindCSS
+    - name: python     # Primary programming language, used for AI/ML projects
+      level: Advanced  # Experience with LLM development, data processing, and scripting
+    - name: matlab     # Scientific computing and numerical analysis
+      level: Intermediate  # Used in academic research and signal processing
+    - name: docker     # Containerization and deployment
+      level: Intermediate  # Familiar with container orchestration and microservices
+    - name: linux      # System administration and development environment
+      level: Intermediate  # Comfortable with command-line tools and shell scripting
+    - name: llm        # Large Language Model development
+      level: Advanced  # Fine-tuning, prompt engineering, and agent development
+    - name: swift      # iOS app development
+      level: Beginner  # Basic mobile app development skills
   position: 2
 
 # Projects
@@ -39,12 +67,15 @@ projects:
     - title: 'Twi.am - Twitter MBTI Receipt'
       description: 'A website generates receipt-style analysis of your MBTI using data scraped from twitter profile.'
       tags: ['Vue3', 'TailwindCSS', 'LLM']
+      link: 'https://github.com/stvlynn/twi.am'  # Optional - URL to project
     - title: 'EasyReceipt'
       description: 'An iOS APP that helps you scan receipts using LLM vision and sync to Feishu.'
       tags: ['Swift', 'LLM']
+      link: 'https://github.com/stvlynn/EasyReceiptSwift'  # Optional - URL to project
     - title: 'Reflection-Chinese-32B'
       description: 'A fine-tuned LLM with CoT.'
       tags: ['LLM']
+      link: 'https://huggingface.co/stvlynn/Reflection-Chinese-32B'  # Optional - URL to project
   position: 3
 
 # Education (Optional)
@@ -64,4 +95,4 @@ links:
     - name: 'Blog'
       url: 'https://blog.stv.pm'
       avatar: '/assets/IMG_3513.jpeg'
-      position: 4
+  position: 4

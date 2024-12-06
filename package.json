@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "flaticon": "^0.1.0",
     "js-yaml": "^4.1.0",
     "vue": "^3.3.11"
   },
