@@ -11,12 +11,18 @@
   ],
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "src": "^/assets/(.*)",
+      "dest": "/assets/$1",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/index.html"
     }
   ]
 }
