@@ -6,7 +6,7 @@
     </h2>
     <div class="flex flex-wrap gap-3">
       <div 
-        v-for="ability in (skills?.abilities || [])" 
+        v-for="ability in sortedAbilities" 
         :key="ability.name" 
         class="flex items-center px-4 py-2 rounded-full group relative transition-colors duration-300"
         :class="[isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200']"
@@ -20,7 +20,7 @@
           class="text-xs absolute bottom-full left-0 mb-1 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all duration-300"
           :class="[isDark ? 'bg-gray-600 text-gray-300' : 'bg-gray-200 text-gray-700']"
         >
-          {{ ability.level }}
+          {{ getLevelText(ability.level) }}
         </span>
       </div>
     </div>
@@ -28,6 +28,9 @@
 </template>
 
 <script setup>
+import iconMap from '../config/icons.yaml'
+import { computed } from 'vue'
+
 const props = defineProps({
   skills: {
     type: Object,
@@ -39,26 +42,28 @@ const props = defineProps({
   }
 })
 
-const getIconClass = (abilityName) => {
-  const iconMap = {
-    vuejs: 'fab fa-vuejs text-green-600',
-    react: 'fab fa-react text-blue-500',
-    angular: 'fab fa-angular text-red-600',
-    nodejs: 'fab fa-node-js text-green-700',
-    python: 'fab fa-python text-blue-600',
-    java: 'fab fa-java text-red-500',
-    cpp: 'fas fa-code text-blue-800',
-    golang: 'fas fa-code text-blue-500',
-    docker: 'fab fa-docker text-blue-600',
-    kubernetes: 'fas fa-dharmachakra text-blue-600',
-    linux: 'fab fa-linux text-gray-800',
-    llm: 'fas fa-robot text-purple-600',
-    swift: 'fab fa-swift text-orange-500',
-    matlab: 'fas fa-square-root-alt text-blue-500'
-  }
+const defaultIconClass = 'fas fa-code text-gray-600'
 
-  return iconMap[abilityName.toLowerCase()] || 'fas fa-code text-gray-600'
+const getIconClass = (abilityName) => {
+  return iconMap[abilityName.toLowerCase()] || defaultIconClass
 }
+
+const getLevelText = (level) => {
+  const levelMap = {
+    '1': 'Beginner',
+    '2': 'Intermediate',
+    '3': 'Advanced',
+    1: 'Beginner',
+    2: 'Intermediate',
+    3: 'Advanced'
+  }
+  return levelMap[level] || 'Unknown'
+}
+
+const sortedAbilities = computed(() => {
+  if (!props.skills?.abilities) return []
+  return [...props.skills.abilities].sort((a, b) => b.level - a.level)
+})
 </script>
 
 <style scoped>

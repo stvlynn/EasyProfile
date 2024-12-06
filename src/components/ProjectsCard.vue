@@ -29,9 +29,14 @@
           <span 
             v-for="tag in (project.tags || [])" 
             :key="tag" 
-            class="tag transition-colors duration-300"
+            class="tag transition-colors duration-300 flex items-center"
             :class="[isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-700']"
           >
+            <i 
+              v-if="getIconClass(tag) !== defaultIconClass"
+              :class="getIconClass(tag)"
+              class="mr-1"
+            ></i>
             {{ tag }}
           </span>
         </div>
@@ -48,6 +53,8 @@
 </template>
 
 <script setup>
+import iconMap from '../config/icons.yaml'
+
 defineProps({
   projects: {
     type: Object,
@@ -58,6 +65,12 @@ defineProps({
     default: false
   }
 })
+
+const defaultIconClass = 'fas fa-code text-gray-600'
+
+const getIconClass = (tag) => {
+  return iconMap[tag.toLowerCase()] || defaultIconClass
+}
 </script>
 
 <style scoped>

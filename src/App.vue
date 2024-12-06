@@ -68,7 +68,7 @@ import ProjectsCard from './components/ProjectsCard.vue'
 import EducationCard from './components/EducationCard.vue'
 import LinksCard from './components/LinksCard.vue'
 import { useDarkMode } from './composables/useDarkMode'
-import profileData from './config/profile.yaml'
+import profileData from './config/config.yaml'
 
 const profile = ref(profileData)
 const loading = ref(false)

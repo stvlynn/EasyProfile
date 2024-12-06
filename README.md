@@ -30,7 +30,7 @@ npm run build
 
 ## 配置说明
 
-编辑 `src/config/profile.yaml` 文件来自定义你的个人信息：
+编辑 `src/config/config.yaml` 文件来自定义你的个人信息：
 
 ### 个人信息
 - avatar: 头像图片路径

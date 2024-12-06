@@ -10,12 +10,25 @@ theme:
       start: '19:00'           # Dark mode start time (24-hour format)
       end: '07:00'             # Dark mode end time (24-hour format)
 
+# Site Configuration
+site:
+  title: "Steven Lynn's Profile"  # Browser tab title
+  favicon: "/favicon.ico"         # Path to favicon file (in public directory)
+
+# OpenGraph Meta Configuration
+og:
+  description: "Steven Lynn's About Page"
+  image:
+    url: "https://cdn.statically.io/gh/stvlynn/cloudimg@master/blog/2310/image.64v30jxjis00.webp"
+    width: 1189
+    height: 795
+
 # Personal Info
 personal:
   avatar: '/assets/IMG_3513.jpeg'  # Path to your avatar image
   name: 'Steven Lynn'
   description: 'AI Dev & Technical Writer'
-  email: 'stvlynn@dify.ai'  # Optional
+  email: 'i@stv.pm'  # Optional
   phone: ''    # Optional
   social:
     github: 'stvlynn'        # Optional
@@ -42,22 +55,40 @@ about:
 
 # Technical Skills
 skills:
+  # Skills configuration section
+  # level: 
+  #   1 = Beginner
+  #   2 = Intermediate 
+  #   3 = Advanced
+  # name: should match one of the keys in icons.yaml, available options:
+  # Technology stack:
+  #   - vuejs, react, angular, nodejs
+  #   - python, java, cpp, golang
+  #   - docker, kubernetes, linux
+  #   - llm, swift, matlab
+  # Development areas:
+  #   - machine-learning, deep-learning
+  #   - computer-vision, natural-language-processing
+  #   - web-development, mobile-development
+  #   - backend, frontend, database
+  #   - cloud, devops, security
+  #   - testing, api, microservices
   title: 'Skills'
   abilities:
     - name: vuejs      # Frontend framework, used in multiple personal projects
-      level: Advanced  # Proficient in Vue 3, Composition API, and TailwindCSS
+      level: 1  # Advanced
     - name: python     # Primary programming language, used for AI/ML projects
-      level: Advanced  # Experience with LLM development, data processing, and scripting
+      level: 2  # Advanced
     - name: matlab     # Scientific computing and numerical analysis
-      level: Intermediate  # Used in academic research and signal processing
+      level: 2  # Intermediate
     - name: docker     # Containerization and deployment
-      level: Intermediate  # Familiar with container orchestration and microservices
+      level: 2  # Intermediate
     - name: linux      # System administration and development environment
-      level: Intermediate  # Comfortable with command-line tools and shell scripting
+      level: 2  # Intermediate
     - name: llm        # Large Language Model development
-      level: Advanced  # Fine-tuning, prompt engineering, and agent development
+      level: 3  # Advanced
     - name: swift      # iOS app development
-      level: Beginner  # Basic mobile app development skills
+      level: 1  # Beginner
   position: 2
 
 # Projects

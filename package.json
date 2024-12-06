@@ -4,14 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node server",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "compression": "^1.7.5",
+    "express": "^4.21.2",
     "flaticon": "^0.1.0",
     "js-yaml": "^4.1.0",
+    "sirv": "^3.0.0",
     "vue": "^3.3.11"
   },
   "devDependencies": {
