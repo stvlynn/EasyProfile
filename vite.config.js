@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import yaml from '@rollup/plugin-yaml'
 import path from 'path'
-import yaml from 'vite-plugin-yaml2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,5 +14,15 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
   }
 })
