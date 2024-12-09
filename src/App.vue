@@ -1,13 +1,13 @@
 <template>
   <div 
-    class="min-h-screen py-6 px-4 sm:px-6 lg:px-8 transition-colors duration-300"
-    :class="[isDark ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900']"
+    class="app-container"
+    :class="[isDark ? 'theme-dark' : 'theme-light']"
   >
-    <div class="max-w-7xl mx-auto">
-      <div v-if="error" class="text-red-500 text-center py-4">
+    <div class="app-content">
+      <div v-if="error" class="app-error">
         {{ error }}
       </div>
-      <div v-else-if="loading" class="text-center py-4">
+      <div v-else-if="loading" class="app-loading">
         Loading...
       </div>
       <div v-else class="space-y-6">
@@ -15,12 +15,12 @@
         <div v-if="profile.theme?.darkMode?.enabled" class="flex justify-end mb-4">
           <button 
             @click="toggleDarkMode" 
-            class="p-2 rounded-full hover:bg-opacity-20"
-            :class="[isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-200']"
+            class="theme-toggle-button"
+            :class="[isDark ? 'theme-dark' : 'theme-light']"
           >
             <i 
-              class="fas text-xl"
-              :class="isDark ? 'fa-sun text-yellow-400' : 'fa-moon text-gray-600'"
+              class="theme-toggle-icon fas"
+              :class="isDark ? 'fa-sun' : 'fa-moon'"
             ></i>
           </button>
         </div>
@@ -31,9 +31,9 @@
         </div>
 
         <!-- Main Content -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="app-columns">
           <!-- Left Column -->
-          <div class="space-y-6">
+          <div class="app-column">
             <template v-for="card in leftColumnCards" :key="card.type">
               <AboutCard v-if="card.type === 'about'" :about="profile.about" :isDark="isDark" />
               <SkillsCard v-if="card.type === 'skills'" :skills="profile.skills" :isDark="isDark" />
@@ -44,7 +44,7 @@
           </div>
 
           <!-- Right Column -->
-          <div class="space-y-6">
+          <div class="app-column">
             <template v-for="card in rightColumnCards" :key="card.type">
               <AboutCard v-if="card.type === 'about'" :about="profile.about" :isDark="isDark" />
               <SkillsCard v-if="card.type === 'skills'" :skills="profile.skills" :isDark="isDark" />
@@ -120,11 +120,5 @@ const rightColumnCards = computed(() => {
 </script>
 
 <style>
-.dark {
-  @apply bg-gray-900 text-gray-100;
-}
-
-.light {
-  @apply bg-gray-100 text-gray-900;
-}
+/* Remove existing styles */
 </style>

@@ -1,24 +1,24 @@
 <template>
-  <div class="card" :class="[isDark ? 'bg-gray-800 shadow-dark' : 'bg-white shadow-light']">
-    <h2 class="text-2xl font-bold mb-4 flex items-center" :class="[isDark ? 'text-white' : 'text-gray-900']">
-      <i class="fas fa-code mr-2" :class="[isDark ? 'text-gray-400' : 'text-gray-700']"></i>
+  <div class="card" :class="[isDark ? 'theme-dark' : 'theme-light']">
+    <h2 class="card-title" :class="[isDark ? 'theme-dark' : 'theme-light']">
+      <i class="fas fa-code mr-2 card-title-icon" :class="[isDark ? 'theme-dark' : 'theme-light']"></i>
       {{ skills?.title || '技术能力' }}
     </h2>
     <div class="flex flex-wrap gap-3">
       <div 
         v-for="ability in sortedAbilities" 
         :key="ability.name" 
-        class="flex items-center px-4 py-2 rounded-full group relative transition-colors duration-300"
-        :class="[isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200']"
+        class="card-item group relative"
+        :class="[isDark ? 'theme-dark' : 'theme-light']"
       >
         <i 
-          :class="[getIconClass(ability.name), isDark ? 'text-gray-300' : 'text-gray-700']"
+          :class="[getIconClass(ability.name)]"
           class="mr-2 transition-transform duration-300 group-hover:scale-110"
         ></i>
-        <span :class="[isDark ? 'text-gray-300' : 'text-gray-700']">{{ ability.name }}</span>
+        <span class="card-text" :class="[isDark ? 'theme-dark' : 'theme-light']">{{ ability.name }}</span>
         <span 
-          class="text-xs absolute bottom-full left-0 mb-1 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all duration-300"
-          :class="[isDark ? 'bg-gray-600 text-gray-300' : 'bg-gray-200 text-gray-700']"
+          class="card-tooltip"
+          :class="[isDark ? 'theme-dark' : 'theme-light']"
         >
           {{ getLevelText(ability.level) }}
         </span>
@@ -71,11 +71,23 @@ const sortedAbilities = computed(() => {
   @apply p-6 rounded-lg transition-colors duration-300;
 }
 
-.shadow-light {
-  @apply shadow-lg;
+.card-title {
+  @apply text-2xl font-bold mb-4 flex items-center;
 }
 
-.shadow-dark {
-  @apply shadow-lg shadow-gray-900/50;
+.card-title-icon {
+  @apply mr-2;
+}
+
+.card-item {
+  @apply flex items-center px-4 py-2 rounded-full;
+}
+
+.card-text {
+  @apply text-gray-700;
+}
+
+.card-tooltip {
+  @apply text-xs absolute bottom-full left-0 mb-1 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all duration-300;
 }
 </style>

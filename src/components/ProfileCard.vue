@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="[isDark ? 'bg-gray-800 shadow-dark' : 'bg-white shadow-light']">
+  <div class="card" :class="[isDark ? 'theme-dark' : 'theme-light']">
     <div class="flex flex-col sm:flex-row items-center justify-center">
       <div class="flex-shrink-0 mb-4 sm:mb-0">
         <img
@@ -11,24 +11,24 @@
         />
       </div>
       <div class="sm:ml-6 text-center">
-        <h1 class="text-3xl font-bold" :class="[isDark ? 'text-white' : 'text-gray-900']">
+        <h1 class="card-title" :class="[isDark ? 'theme-dark' : 'theme-light']">
           {{ profile?.name || 'Your Name' }}
         </h1>
-        <p class="mt-2 text-lg" :class="[isDark ? 'text-gray-300' : 'text-gray-600']">
+        <p class="mt-2 text-lg card-text" :class="[isDark ? 'theme-dark' : 'theme-light']">
           {{ profile?.description || 'Your Description' }}
         </p>
         <div class="mt-4 space-y-2">
           <div v-if="profile?.email" class="flex items-center justify-center">
-            <i class="fas fa-envelope" :class="[isDark ? 'text-gray-400' : 'text-gray-500']"></i>
-            <a :href="'mailto:' + profile.email" class="ml-2 hover:text-primary transition-colors duration-300"
-              :class="[isDark ? 'text-gray-300' : 'text-gray-600']">
+            <i class="fas fa-envelope card-title-icon" :class="[isDark ? 'theme-dark' : 'theme-light']"></i>
+            <a :href="'mailto:' + profile.email" class="ml-2 hover:text-primary transition-colors duration-300 card-text"
+              :class="[isDark ? 'theme-dark' : 'theme-light']">
               {{ profile.email }}
             </a>
           </div>
           <div v-if="profile?.phone" class="flex items-center justify-center">
-            <i class="fas fa-phone" :class="[isDark ? 'text-gray-400' : 'text-gray-500']"></i>
-            <a :href="'tel:' + profile.phone" class="ml-2 hover:text-primary transition-colors duration-300"
-              :class="[isDark ? 'text-gray-300' : 'text-gray-600']">
+            <i class="fas fa-phone card-title-icon" :class="[isDark ? 'theme-dark' : 'theme-light']"></i>
+            <a :href="'tel:' + profile.phone" class="ml-2 hover:text-primary transition-colors duration-300 card-text"
+              :class="[isDark ? 'theme-dark' : 'theme-light']">
               {{ profile.phone }}
             </a>
           </div>
@@ -190,19 +190,7 @@ const handleImageError = (e) => {
 </script>
 
 <style scoped>
-.card {
-  @apply p-6 rounded-lg transition-colors duration-300;
-}
-
-.shadow-light {
-  @apply shadow-lg;
-}
-
-.shadow-dark {
-  @apply shadow-lg shadow-gray-900/50;
-}
-
 .social-link {
-  @apply p-2 rounded-full hover:bg-opacity-20 transition-all duration-300;
+  @apply p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700;
 }
 </style>

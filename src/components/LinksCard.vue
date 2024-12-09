@@ -1,7 +1,7 @@
 <template>
-  <div class="card" :class="[isDark ? 'bg-gray-800 shadow-dark' : 'bg-white shadow-light']">
-    <h2 class="text-2xl font-bold mb-4 flex items-center" :class="[isDark ? 'text-white' : 'text-gray-900']">
-      <i class="fas fa-link mr-2" :class="[isDark ? 'text-gray-400' : 'text-gray-700']"></i>
+  <div class="card" :class="[isDark ? 'theme-dark' : 'theme-light']">
+    <h2 class="card-title" :class="[isDark ? 'theme-dark' : 'theme-light']">
+      <i class="fas fa-link mr-2 card-title-icon" :class="[isDark ? 'theme-dark' : 'theme-light']"></i>
       {{ links?.title || '链接' }}
     </h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -10,7 +10,7 @@
         :key="link.name"
         :href="link.url"
         target="_blank"
-        class="link-card p-4 rounded-lg transition-colors duration-300 hover:scale-105 transform"
+        class="link-card p-4 rounded-lg transition-all duration-300 hover:scale-105 transform"
         :class="[isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-50 hover:bg-gray-100']"
       >
         <div class="flex items-center">
@@ -20,15 +20,15 @@
             class="w-10 h-10 rounded-full object-cover"
             @error="handleImageError"
           />
-          <span class="ml-3 font-medium" :class="[isDark ? 'text-gray-200' : 'text-gray-700']">
+          <span class="ml-3 font-medium card-text" :class="[isDark ? 'theme-dark' : 'theme-light']">
             {{ link.name }}
           </span>
         </div>
       </a>
       <div 
         v-if="!(links?.items?.length)" 
-        class="text-center py-4 col-span-2"
-        :class="[isDark ? 'text-gray-400' : 'text-gray-500']"
+        class="text-center py-4 col-span-2 card-text"
+        :class="[isDark ? 'theme-dark' : 'theme-light']"
       >
         暂无链接
       </div>
@@ -52,7 +52,7 @@ defineProps({
   }
 })
 
-const handleImageError = (e) => {
+function handleImageError(e) {
   e.target.src = props.config.personal.avatar
 }
 </script>
@@ -60,14 +60,6 @@ const handleImageError = (e) => {
 <style scoped>
 .card {
   @apply p-6 rounded-lg transition-colors duration-300;
-}
-
-.shadow-light {
-  @apply shadow-lg;
-}
-
-.shadow-dark {
-  @apply shadow-lg shadow-gray-900/50;
 }
 
 .link-card {

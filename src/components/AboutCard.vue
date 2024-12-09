@@ -1,13 +1,13 @@
 <template>
-  <div class="card" :class="[isDark ? 'bg-gray-800 shadow-dark' : 'bg-white shadow-light']">
-    <h2 class="text-2xl font-bold mb-4 flex items-center" :class="[isDark ? 'text-white' : 'text-gray-900']">
-      <i class="fas fa-user-circle mr-2" :class="[isDark ? 'text-gray-400' : 'text-gray-700']"></i>
+  <div class="card" :class="[isDark ? 'theme-dark' : 'theme-light']">
+    <h2 class="card-title" :class="[isDark ? 'theme-dark' : 'theme-light']">
+      <i class="fas fa-user-circle mr-2 card-title-icon" :class="[isDark ? 'theme-dark' : 'theme-light']"></i>
       {{ about?.title || '关于我' }}
     </h2>
     <div class="space-y-4">
       <p 
-        class="transition-colors duration-300"
-        :class="[isDark ? 'text-gray-300' : 'text-gray-600']"
+        class="card-text transition-colors duration-300"
+        :class="[isDark ? 'theme-dark' : 'theme-light']"
       >
         {{ about?.description || '暂无内容' }}
       </p>
@@ -31,13 +31,5 @@ defineProps({
 <style scoped>
 .card {
   @apply p-6 rounded-lg transition-colors duration-300;
-}
-
-.shadow-light {
-  @apply shadow-lg;
-}
-
-.shadow-dark {
-  @apply shadow-lg shadow-gray-900/50;
 }
 </style>

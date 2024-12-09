@@ -1,0 +1,56 @@
+/* 全局布局和主题样式 */
+.app-container {
+  @apply min-h-screen py-6 px-4 sm:px-6 lg:px-8 transition-colors duration-300;
+}
+
+.app-container.theme-light {
+  @apply bg-gray-100 text-gray-900;
+}
+
+.app-container.theme-dark {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.app-content {
+  @apply max-w-7xl mx-auto;
+}
+
+.app-error {
+  @apply text-red-500 text-center py-4;
+}
+
+.app-loading {
+  @apply text-center py-4;
+}
+
+.theme-toggle-button {
+  @apply p-2 rounded-full hover:bg-opacity-20 transition-colors duration-300;
+}
+
+.theme-toggle-button.theme-light {
+  @apply hover:bg-gray-200;
+}
+
+.theme-toggle-button.theme-dark {
+  @apply hover:bg-gray-700;
+}
+
+.theme-toggle-icon {
+  @apply text-xl;
+}
+
+.theme-toggle-icon.theme-light {
+  @apply text-gray-600;
+}
+
+.theme-toggle-icon.theme-dark {
+  @apply text-yellow-400;
+}
+
+.app-columns {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+}
+
+.app-column {
+  @apply space-y-6;
+}

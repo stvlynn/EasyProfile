@@ -1,7 +1,7 @@
 <template>
-  <div class="card" :class="[isDark ? 'bg-gray-800 shadow-dark' : 'bg-white shadow-light']">
-    <h2 class="text-2xl font-bold mb-4 flex items-center" :class="[isDark ? 'text-white' : 'text-gray-900']">
-      <i class="fas fa-project-diagram mr-2" :class="[isDark ? 'text-gray-400' : 'text-gray-700']"></i>
+  <div class="card" :class="[isDark ? 'theme-dark' : 'theme-light']">
+    <h2 class="card-title" :class="[isDark ? 'theme-dark' : 'theme-light']">
+      <i class="fas fa-project-diagram mr-2 card-title-icon" :class="[isDark ? 'theme-dark' : 'theme-light']"></i>
       {{ projects?.title || '项目' }}
     </h2>
     <div class="space-y-6">
@@ -11,7 +11,7 @@
         class="pb-4 last:pb-0 border-b last:border-0 transition-colors duration-300"
         :class="[isDark ? 'border-gray-700' : 'border-gray-200']"
       >
-        <h3 class="text-xl font-semibold" :class="[isDark ? 'text-gray-200' : 'text-gray-800']">
+        <h3 class="text-xl font-semibold card-text" :class="[isDark ? 'theme-dark' : 'theme-light']">
           <a 
             v-if="project.link" 
             :href="project.link" 
@@ -22,7 +22,7 @@
           </a>
           <span v-else>{{ project.title }}</span>
         </h3>
-        <p class="mt-2" :class="[isDark ? 'text-gray-400' : 'text-gray-600']">
+        <p class="mt-2 card-text" :class="[isDark ? 'theme-dark' : 'theme-light']">
           {{ project.description }}
         </p>
         <div class="mt-3 flex flex-wrap">
@@ -43,8 +43,8 @@
       </div>
       <div 
         v-if="!(projects?.items?.length)" 
-        class="text-center py-4"
-        :class="[isDark ? 'text-gray-400' : 'text-gray-500']"
+        class="text-center py-4 card-text"
+        :class="[isDark ? 'theme-dark' : 'theme-light']"
       >
         暂无项目
       </div>
@@ -54,6 +54,8 @@
 
 <script setup>
 import iconMap from '../config/icons.yaml'
+
+const defaultIconClass = 'fas fa-code text-gray-600'
 
 defineProps({
   projects: {
@@ -65,8 +67,6 @@ defineProps({
     default: false
   }
 })
-
-const defaultIconClass = 'fas fa-code text-gray-600'
 
 const getIconClass = (tag) => {
   return iconMap[tag.toLowerCase()] || defaultIconClass
@@ -87,6 +87,6 @@ const getIconClass = (tag) => {
 }
 
 .tag {
-  @apply px-2 py-1 rounded-md text-sm mr-2 mb-2;
+  @apply px-3 py-1 text-sm rounded-full mr-2 mb-2;
 }
 </style>
