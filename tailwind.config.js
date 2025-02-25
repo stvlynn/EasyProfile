@@ -1,3 +1,22 @@
+/**
+ * Tailwind CSS Configuration
+ * 
+ * Purpose: Customize Tailwind CSS settings
+ * 
+ * Implementation:
+ * - Extends default Tailwind theme
+ * - Adds custom colors and breakpoints
+ * - Configures dark mode support
+ * 
+ * Technologies:
+ * - Tailwind CSS
+ * - PostCSS
+ * 
+ * Interaction:
+ * - Used by all components for styling
+ * - Integrates with Vite build system
+ */
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [

@@ -1,3 +1,23 @@
+/**
+ * ProjectsSection Component
+ * 
+ * Purpose: Displays a grid of project cards with GitHub stats integration
+ * 
+ * Implementation:
+ * - Uses GitHub API (via Octokit) to fetch star counts for repositories
+ * - Implements caching to reduce API calls
+ * - Renders responsive grid of project cards
+ * 
+ * Technologies:
+ * - React + TypeScript
+ * - Tailwind CSS for styling
+ * - Octokit for GitHub API integration
+ * 
+ * Interaction:
+ * - Receives projects data from parent component
+ * - Fetches GitHub stats on component mount
+ * - Renders interactive project cards with hover effects
+ */
 import { Section } from './Section';
 import { Card } from './Card';
 import type { Project } from '../types/profile';

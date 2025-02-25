@@ -1,4 +1,21 @@
-sections:
+
+
+# Profile Configuration
+#
+# Purpose: Centralized configuration for profile data
+#
+# Structure:
+# - Personal information (name, tagline, email, avatar)
+# - Social media links
+# - Projects with GitHub integration
+# - Experience timeline
+# - Education history
+# - Tech stack
+#
+# Usage:
+# - Imported by various components to render profile content
+# - Supports markdown for rich text formatting
+# - Enables easy content updates without code changessections:
   profile: 1
   intro: 2
   projects: 3

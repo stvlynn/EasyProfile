@@ -1,3 +1,23 @@
+/**
+ * EducationSection Component
+ * 
+ * Purpose: Displays education history in a timeline format
+ * 
+ * Implementation:
+ * - Renders education cards with image and description
+ * - Implements responsive layout (mobile/desktop)
+ * - Adds hover animations and transitions
+ * 
+ * Technologies:
+ * - React + TypeScript
+ * - Tailwind CSS for styling
+ * - Framer Motion for animations
+ * 
+ * Interaction:
+ * - Receives education data from parent component
+ * - Renders interactive education cards
+ * - Integrates with main layout
+ */
 import { Section } from './Section';
 import { Card } from './Card';
 import type { Education } from '../types/profile';

@@ -1,3 +1,23 @@
+/**
+ * ProfileSection Component
+ * 
+ * Purpose: Displays personal profile information
+ * 
+ * Implementation:
+ * - Renders profile picture, name, tagline and social links
+ * - Implements responsive layout
+ * - Adds hover effects and transitions
+ * 
+ * Technologies:
+ * - React + TypeScript
+ * - Tailwind CSS for styling
+ * - Heroicons for social icons
+ * 
+ * Interaction:
+ * - Receives profile data from parent component
+ * - Renders interactive profile section
+ * - Integrates with main layout
+ */
 import { Link as LinkIcon } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { motion } from 'framer-motion';
