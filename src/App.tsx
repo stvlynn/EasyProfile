@@ -19,7 +19,7 @@ function App() {
     const loadProfile = async () => {
       try {
         // Load profile.yaml
-        const profileResponse = await fetch('/src/config/profile.yaml');
+        const profileResponse = await fetch('/config/profile.yaml');
         const yamlText = await profileResponse.text();
         const data = yaml.load(yamlText) as ProfileData;
 
@@ -43,7 +43,7 @@ function App() {
         
         // Load intro.md if it exists in the data
         if (data.intro?.content) {
-          const introResponse = await fetch(`/src/config/${data.intro.content}`);
+          const introResponse = await fetch(`/config/${data.intro.content}`);
           const introText = await introResponse.text();
           setIntroContent(introText);
         }
@@ -51,10 +51,10 @@ function App() {
         setProfileData(data);
         
         // Calculate sections once when profile data is loaded
-        const orderedSections = Object.entries(data.sections)
+        const orderedSections = data.sections ? Object.entries(data.sections)
           .filter(([_, order]) => order > 0)
           .sort(([_, a], [__, b]) => a - b)
-          .map(([key]) => key);
+          .map(([key]) => key) : [];
         setSections(orderedSections);
       } catch (error) {
         console.error('Error loading profile:', error);
