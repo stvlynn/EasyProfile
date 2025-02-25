@@ -15,7 +15,14 @@
 # Usage:
 # - Imported by various components to render profile content
 # - Supports markdown for rich text formatting
-# - Enables easy content updates without code changessections:
+# - Enables easy content updates without code changes
+
+meta:
+  title: "Steven Lynn - AI Developer & Photographer"
+  description: "Personal portfolio of Steven Lynn, an AI developer and amateur landscape photographer."
+  favicon: "/avatar.jpg"
+
+sections:
   profile: 1
   intro: 2
   projects: 3
@@ -35,7 +42,6 @@ profile:
       url: https://twitter.com/stvlynn
     - platform: LinkedIn
       url: https://www.linkedin.com/in/hongyi-ling-420346285
-
 
 ## Intro
 intro:

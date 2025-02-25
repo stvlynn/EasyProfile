@@ -22,6 +22,24 @@ function App() {
         const profileResponse = await fetch('/src/config/profile.yaml');
         const yamlText = await profileResponse.text();
         const data = yaml.load(yamlText) as ProfileData;
+
+        // Update meta information
+        if (data.meta) {
+          document.title = data.meta.title;
+          const favicon = document.querySelector('link[rel="icon"]');
+          if (favicon) {
+            favicon.setAttribute('href', data.meta.favicon);
+          }
+          const metaDescription = document.querySelector('meta[name="description"]');
+          if (metaDescription) {
+            metaDescription.setAttribute('content', data.meta.description);
+          } else {
+            const meta = document.createElement('meta');
+            meta.name = 'description';
+            meta.content = data.meta.description;
+            document.head.appendChild(meta);
+          }
+        }
         
         // Load intro.md if it exists in the data
         if (data.intro?.content) {
