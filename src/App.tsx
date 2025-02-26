@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import yaml from 'js-yaml';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Github } from 'lucide-react';
 import type { ProfileData } from './types/profile';
 import { ProfileSection } from './components/ProfileSection';
 import { IntroSection } from './components/IntroSection';
@@ -9,6 +9,19 @@ import { ExperiencesSection } from './components/ExperiencesSection';
 import { TechStacksSection } from './components/TechStacksSection';
 import { EducationSection } from './components/EducationSection';
 import { ResumeExportButton } from './components/ResumeExportButton';
+
+// 彩蛋类型定义
+interface EasterEgg {
+  id: string;
+  trigger: string;
+  content: string;
+}
+
+interface EasterEggsConfig {
+  enabled: boolean;
+  autoDisplay: boolean;
+  eggs: EasterEgg[];
+}
 
 // 扩展 ProfileData 接口以包含 YAML 中实际使用的属性
 export interface ExtendedProfileData extends ProfileData {
@@ -28,6 +41,7 @@ export interface ExtendedProfileData extends ProfileData {
       };
       label?: string;
     };
+    easterEggs?: EasterEggsConfig;
   };
   sections?: Record<string, number>;
 }
@@ -38,6 +52,63 @@ function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const [sections, setSections] = useState<string[]>([]);
   const touchStartY = useRef<number | null>(null);
+  const easterEggsLoaded = useRef<boolean>(false);
+
+  // 加载彩蛋内容
+  const loadEasterEgg = async (eggPath: string): Promise<string> => {
+    try {
+      const response = await fetch(`/config/${eggPath}`);
+      if (!response.ok) {
+        throw new Error(`Failed to load easter egg: ${response.status}`);
+      }
+      return await response.text();
+    } catch (error) {
+      console.error('Error loading easter egg:', error);
+      return '// Easter egg content could not be loaded';
+    }
+  };
+
+  // 设置彩蛋
+  const setupEasterEggs = async (easterEggs: EasterEggsConfig) => {
+    if (!easterEggs || !easterEggs.enabled || easterEggsLoaded.current) {
+      return;
+    }
+
+    // 标记彩蛋已加载，避免重复加载
+    easterEggsLoaded.current = true;
+
+    // 处理每个彩蛋
+    for (const egg of easterEggs.eggs) {
+      const eggContent = await loadEasterEgg(egg.content);
+      
+      if (egg.trigger === '' && easterEggs.autoDisplay) {
+        // 自动显示的彩蛋
+        console.log(eggContent);
+      } else if (egg.trigger) {
+        // 需要触发的彩蛋
+        const originalConsoleLog = console.log;
+        
+        // 重写 console.log 来检测触发词
+        console.log = function(...args) {
+          originalConsoleLog.apply(console, args);
+          
+          // 检查是否包含触发词
+          const input = args.join(' ').toLowerCase().replace(/['"]/g, '');
+          if (input === egg.trigger.toLowerCase()) {
+            originalConsoleLog(eggContent);
+          }
+        };
+
+        // 为开发者添加提示
+        console.info(`🥚 Type console.log("${egg.trigger}") to reveal an easter egg!`);
+
+        // 创建全局触发函数
+        (window as any)[egg.trigger] = () => {
+          console.log(eggContent);
+        };
+      }
+    }
+  };
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -62,6 +133,11 @@ function App() {
             meta.name = 'description';
             meta.content = data.meta.description;
             document.head.appendChild(meta);
+          }
+          
+          // 设置彩蛋
+          if (data.meta.easterEggs) {
+            setupEasterEggs(data.meta.easterEggs);
           }
         }
         
@@ -173,7 +249,25 @@ function App() {
 
   return (
     <div className="relative bg-gray-900">
-      {profileData && <ResumeExportButton profileData={profileData} />}
+      {/* 移除固定定位容器，分别为两个按钮设置位置 */}
+      
+      {/* GitHub Star 按钮 */}
+      <a
+        href="https://github.com/stvlynn/EasyProfile"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed top-4 right-16 z-50 flex items-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg shadow-lg transition-colors duration-300"
+      >
+        <Github size={18} className="mr-2" />
+        <span className="text-sm font-medium">Star</span>
+      </a>
+      
+      {/* 导出简历按钮 */}
+      {profileData && 
+        <div className="fixed top-4 right-4 z-50">
+          <ResumeExportButton profileData={profileData} />
+        </div>
+      }
       
       {renderSection(sections[currentSection])}
       

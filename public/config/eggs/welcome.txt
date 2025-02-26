@@ -1,0 +1,14 @@
+ _____                 _____            __ _ _      
+ | ____|__ _ ___ _   _|  __ \ _ __ ___ / _(_) | ___ 
+ |  _| / _` / __| | | | |__) | '__/ _ \ |_| | |/ _ \
+ | |__| (_| \__ \ |_| |  ___/| | |  __/  _| | |  __/
+ |_____\__,_|___/\__, |_|    |_|  \___|_| |_|_|\___|
+                 |___/                              
+
+ Welcome to EasyProfile! 
+ 
+ This is a hidden easter egg feature. You've found the first one!
+ 
+ Try typing "konami" or "showmethecode" in the console for more surprises.
+ 
+ Happy exploring! 

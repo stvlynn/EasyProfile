@@ -23,7 +23,9 @@ import * as LucideIcons from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Section } from './Section';
 import { Card } from './Card';
-import type { ProfileData } from '../types/profile';
+import { BentoGrid } from './BentoGrid';
+import type { ProfileData, AnyCard } from '../types/profile';
+import { CardType, CardSize } from '../types/profile';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import { icons } from '../config/icons';
 
@@ -35,7 +37,7 @@ export function ProfileSection({ data }: ProfileSectionProps) {
   const getIconComponent = (platform: string) => {
     const iconKey = platform.toLowerCase();
     const config = icons[iconKey];
-    return config ? LucideIcons[config.icon] : LinkIcon;
+    return config ? (LucideIcons as any)[config.icon] : LinkIcon;
   };
 
   const getIconColor = (platform: string) => {
@@ -43,6 +45,55 @@ export function ProfileSection({ data }: ProfileSectionProps) {
     const config = icons[iconKey];
     return config ? `text-${config.color}` : 'text-gray-300';
   };
+
+  // 准备卡片数据
+  const prepareDefaultCards = (): AnyCard[] => {
+    const defaultCards: AnyCard[] = [];
+    const socialLinks = data.socialMedia || data.links || [];
+    
+    // 创建社交媒体卡片
+    socialLinks.forEach((link, index) => {
+      const platform = link.platform.toLowerCase();
+      
+      if (platform === 'github') {
+        // GitHub卡片
+        const username = new URL(link.url).pathname.split('/')[1];
+        defaultCards.push({
+          id: `github-${index}`,
+          type: CardType.GITHUB,
+          title: `GitHub`,
+          description: 'My GitHub profile',
+          username,
+          size: CardSize.MEDIUM
+        });
+      } else if (platform === 'twitter') {
+        // Twitter卡片
+        const username = new URL(link.url).pathname.split('/')[1];
+        defaultCards.push({
+          id: `twitter-${index}`,
+          type: CardType.TWITTER,
+          title: `Twitter`,
+          description: 'Follow me on Twitter',
+          username,
+          size: CardSize.MEDIUM
+        });
+      } else {
+        // 通用链接卡片
+        defaultCards.push({
+          id: `link-${index}`,
+          type: CardType.LINK,
+          title: link.platform,
+          url: link.url,
+          size: CardSize.SMALL
+        });
+      }
+    });
+    
+    return defaultCards;
+  };
+
+  // 获取用户自定义卡片或使用默认卡片
+  const cards = data.cards || prepareDefaultCards();
 
   return (
     <Section className="bg-gradient-to-b from-gray-900 via-gray-850 to-gray-900 relative overflow-hidden">
@@ -55,7 +106,8 @@ export function ProfileSection({ data }: ProfileSectionProps) {
         animate="animate"
         className="relative"
       >
-        <Card className="text-center max-w-2xl mx-auto backdrop-blur-md">
+        {/* 主卡片 - 个人信息 */}
+        <Card className="text-center max-w-2xl mx-auto backdrop-blur-md mb-12">
           <motion.div variants={fadeInUp} className="space-y-6">
             <div className="relative inline-block">
               <motion.div
@@ -97,7 +149,7 @@ export function ProfileSection({ data }: ProfileSectionProps) {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="flex justify-center gap-4">
-              {data.socialMedia.map((social) => {
+              {(data.socialMedia || data.links || []).map((social) => {
                 const Icon = getIconComponent(social.platform);
                 const iconColor = getIconColor(social.platform);
                 return (
@@ -119,6 +171,18 @@ export function ProfileSection({ data }: ProfileSectionProps) {
             </motion.div>
           </motion.div>
         </Card>
+        
+        {/* Bento卡片网格 */}
+        {cards.length > 0 && (
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="mt-8"
+          >
+            <BentoGrid cards={cards} />
+          </motion.div>
+        )}
       </motion.div>
     </Section>
   );

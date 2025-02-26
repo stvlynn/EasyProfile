@@ -1,43 +1,74 @@
 # Profile Configuration
 #
-# Purpose: Centralized configuration for profile data
+# Purpose: Centralized configuration for profile data and website settings
 #
 # Structure:
-# - Personal information (name, tagline, email, avatar)
+# - Meta information (title, description, favicon)
+# - Resume export settings
+# - Section order configuration
+# - Personal information
 # - Social media links
+# - Bento grid cards
 # - Projects with GitHub integration
 # - Experience timeline
 # - Education history
-# - Tech stack
+# - Tech stack proficiency
 #
 # Usage:
-# - Imported by various components to render profile content
-# - Supports markdown for rich text formatting
-# - Enables easy content updates without code changes
+# - Used by various components to render profile content
+# - Supports markdown formatting in text fields
+# - Enables content updates without code changes
+# - Configures the layout and appearance of the portfolio
 
 meta:
   title: "Steven Lynn - AI Developer & Photographer"
   description: "Personal portfolio of Steven Lynn, an AI developer and amateur landscape photographer."
   favicon: "/avatar.jpg"
-  # 简历导出功能配置
+  # Resume Export Configuration
   resumeExport:
-    enabled: true     # 是否启用导出按钮
-    sections:         # 控制导出到简历中的内容
-      profile: true   # 个人信息
-      experiences: true # 工作经历
-      education: true # 教育经历
-      projects: true  # 项目经验
-      techStacks: true # 技术栈
-      intro: false    # 个人介绍（默认不导出）
+    enabled: true     # Enable/disable the export button
+    sections:         # Control which sections to include in the exported resume
+      profile: true   # Personal information
+      experiences: true # Work experience
+      education: true # Education history
+      projects: true  # Project showcase
+      techStacks: true # Technical skills
+      intro: false    # Introduction (disabled by default)
+  
+  # Easter Egg Configuration
+  # Hidden features that can be triggered in specific ways
+  easterEggs:
+    enabled: true                # Master switch to enable/disable all easter eggs
+    autoDisplay: true            # If true, displays easter eggs automatically in console
+    eggs:                        # List of individual easter eggs
+      - id: welcome              # Unique identifier for this easter egg
+        trigger: "hi"            # Trigger word to activate this easter egg
+        content: ./eggs/welcome.txt  # Path to the content file
+      
+      - id: konami               # Classic Konami code easter egg
+        trigger: "konami"        # Triggered when user types "konami" in console
+        content: ./eggs/konami.txt   # Path to the content file
+      
+      - id: wechat               # WeChat QR code easter egg
+        trigger: "wechat"        # Triggered when user types "wechat" in console
+        content: ./eggs/wechat.txt   # Path to the ASCII QR code file
+      
+      - id: secret               # Secret message
+        trigger: "showmethecode" # Triggered when user types "showmethecode" in console
+        content: ./eggs/secret.txt   # Path to the content file
 
+# Section Order Configuration
+# Controls the order and visibility of main sections
+# Lower numbers appear first, sections without numbers are hidden
 sections:
-  profile: 1
-  intro: 2
-  projects: 3
-  experiences: 4
-  techStacks: 5
-  education: 6
+  profile: 1    # Personal information section
+  intro: 2      # Introduction/About section
+  projects: 3   # Projects showcase section
+  experiences: 4 # Work experience section
+  techStacks: 5 # Technical skills section
+  education: 6  # Education history section
 
+# Personal Information and Social Media
 profile:
   name: Steven Lynn
   tagline: 🤖 AI Dev | 📷 Amateur Landscape Photographer
@@ -51,10 +82,96 @@ profile:
     - platform: LinkedIn
       url: https://www.linkedin.com/in/hongyi-ling-420346285
 
-## Intro
+  # Grid Card Configuration
+  # Each card represents a widget in the profile's grid layout
+  cards:
+    # GitHub Profile Card
+    # Displays GitHub contribution graph and profile information
+    - id: github-profile
+      type: github
+      title: GitHub
+      description: Check out my GitHub profile
+      username: stvlynn
+      size: medium
+    
+    # Twitter Profile Card
+    # Shows Twitter feed and profile information
+    - id: twitter-profile
+      type: twitter
+      title: Twitter
+      description: Follow me on Twitter
+      username: stvlynn
+      size: medium
+    
+    # Blog Link Card
+    # Links to personal blog with preview image
+    - id: blog-link
+      type: link
+      title: My Blog
+      description: Personal tech blog
+      url: https://blog.stv.pm
+      image: https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d
+      size: medium
+    
+    # Location Card - Suzhou
+    # Shows current location on an interactive map
+    - id: location-suzhou
+      type: map
+      title: Works in Suzhou
+      description: Current location
+      location: Suzhou, China
+      coordinates:
+        lat: 31.2989
+        lng: 120.5853
+      size: small
+    
+    # Location Card - Nanjing
+    # Shows university location on an interactive map
+    - id: location-nanjing
+      type: map
+      title: Study in Nanjing
+      description: University location
+      location: Nanjing, China
+      coordinates:
+        lat: 32.0584
+        lng: 118.7965
+      size: small
+    
+    # Text Card
+    # Displays a brief introduction or statement
+    - id: about-text
+      type: text
+      title: 
+      content: "喂马、劈柴、周游世界"
+      size: medium
+    
+    # Mastodon Profile Card
+    # Links to Mastodon social profile
+    #- id: mastodon
+    #  type: mastodon
+    #  title: Mastodon
+    #  description: Find me on Mastodon
+    #  instance: mastodon.social
+    #  username: 
+    #  size: small
+    
+    # Bluesky Profile Card
+    # Custom card for Bluesky social profile
+    #- id: bluesky
+    #  type: custom
+    #  title: "Bluesky"
+    #  content: "Steven Lynn (@stv.pm)"
+    #  icon: twitter
+    #  backgroundColor: "#1da1f2"
+    #  size: small
+
+# Introduction Section
+# Content loaded from external markdown file
 intro:
   content: ./intro.md
 
+# Projects Section
+# Showcase of personal and professional projects
 projects:
   - name: Twi.am
     description: A Twitter MBTI personality analysis tool that infers users' personality types through their Twitter behavior, combining social media analytics with psychological theories.
@@ -98,6 +215,8 @@ projects:
     url: https://github.com/stvlynn/langfixer
     tech: [TypeScript, i18n, React]
 
+# Work Experience Section
+# Professional experience and roles
 experiences:
   - company: Dify
     position: Community Operations Associate
@@ -105,6 +224,8 @@ experiences:
     description: Building usecases for Dify. Maintaining community health and growth.
     image: /experiences/dify.png
 
+# Technical Skills Section
+# Skills and proficiency levels (0-3)
 techStacks:
   - name: React
     proficiency: 3
@@ -119,6 +240,8 @@ techStacks:
     proficiency: 2
     icon: python
 
+# Education Section
+# Academic background and qualifications
 education:
   - institution: Nanjing Forestry University
     degree: Bachelor of Engineering
