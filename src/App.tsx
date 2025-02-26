@@ -77,21 +77,39 @@ function App() {
     };
 
     const handleTouchStart = (e: TouchEvent) => {
+      // 只有当触摸事件不是发生在可滚动元素内部时才阻止默认行为
+      const target = e.target as HTMLElement;
+      const scrollableParent = findScrollableParent(target);
+      
+      // 如果在可滚动元素内部且该元素未滚动到边界，则不阻止默认行为
+      if (scrollableParent && !isScrolledToEdge(scrollableParent, e.touches[0].clientY < touchStartY.current)) {
+        return;
+      }
+      
       e.preventDefault();
       const touch = e.touches[0];
       touchStartY.current = touch.clientY;
     };
   
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
       if (!sections.length || touchStartY.current === null) return;
-  
+      
+      const target = e.target as HTMLElement;
+      const scrollableParent = findScrollableParent(target);
       const touch = e.touches[0];
       const deltaY = touchStartY.current - touch.clientY;
+      const isScrollingDown = deltaY > 0;
+      
+      // 如果在可滚动元素内部且该元素未滚动到边界，则不处理部分切换
+      if (scrollableParent && !isScrolledToEdge(scrollableParent, isScrollingDown)) {
+        return;
+      }
+      
+      e.preventDefault();
       const threshold = 30; // 降低滑动阈值，提高灵敏度
   
       if (Math.abs(deltaY) > threshold) {
-        if (deltaY > 0) {
+        if (isScrollingDown) {
           setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1));
         } else {
           setCurrentSection((prev) => Math.max(prev - 1, 0));
@@ -102,6 +120,34 @@ function App() {
   
     const handleTouchEnd = () => {
       touchStartY.current = null;
+    };
+    
+    // 工具函数：查找可滚动的父元素
+    const findScrollableParent = (element: HTMLElement | null): HTMLElement | null => {
+      if (!element || element === document.body) return null;
+      
+      const { overflowY } = window.getComputedStyle(element);
+      const isScrollable = 
+        overflowY !== 'visible' && 
+        overflowY !== 'hidden' && 
+        element.scrollHeight > element.clientHeight;
+        
+      if (isScrollable) {
+        return element;
+      }
+      
+      return findScrollableParent(element.parentElement);
+    };
+    
+    // 工具函数：检查元素是否已滚动到边缘
+    const isScrolledToEdge = (element: HTMLElement, isScrollingDown: boolean): boolean => {
+      if (isScrollingDown) {
+        // 向下滚动时，检查是否到达底部
+        return Math.abs(element.scrollHeight - element.scrollTop - element.clientHeight) < 1;
+      } else {
+        // 向上滚动时，检查是否到达顶部
+        return element.scrollTop <= 0;
+      }
     };
   
     window.addEventListener('wheel', handleWheel);

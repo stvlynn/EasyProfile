@@ -1,5 +1,3 @@
-import { IconName } from '../config/icons';
-
 export interface SocialMedia {
   platform: string;
   url: string;
@@ -32,7 +30,7 @@ export interface Education {
 export interface TechnologyStack {
   name: string;
   proficiency: 0 | 1 | 2 | 3;
-  icon: IconName;
+  icon: string;
 }
 
 export interface Profile {
@@ -52,4 +50,12 @@ export interface ProfileData {
   experiences: Experience[];
   education: Education[];
   techStacks: TechnologyStack[];
+  meta?: {
+    title: string;
+    favicon: string;
+    description: string;
+  };
+  sections?: {
+    [key: string]: number;
+  };
 }
