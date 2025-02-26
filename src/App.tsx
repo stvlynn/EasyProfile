@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import yaml from 'js-yaml';
 import { ChevronDown } from 'lucide-react';
 import type { ProfileData } from './types/profile';
@@ -14,6 +14,7 @@ function App() {
   const [introContent, setIntroContent] = useState<string>('');
   const [currentSection, setCurrentSection] = useState(0);
   const [sections, setSections] = useState<string[]>([]);
+  const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -75,8 +76,45 @@ function App() {
       }
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      touchStartY.current = touch.clientY;
+    };
+  
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      if (!sections.length || touchStartY.current === null) return;
+  
+      const touch = e.touches[0];
+      const deltaY = touchStartY.current - touch.clientY;
+      const threshold = 30; // 降低滑动阈值，提高灵敏度
+  
+      if (Math.abs(deltaY) > threshold) {
+        if (deltaY > 0) {
+          setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1));
+        } else {
+          setCurrentSection((prev) => Math.max(prev - 1, 0));
+        }
+        touchStartY.current = null;
+      }
+    };
+  
+    const handleTouchEnd = () => {
+      touchStartY.current = null;
+    };
+  
     window.addEventListener('wheel', handleWheel);
-    return () => window.removeEventListener('wheel', handleWheel);
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
+  
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
   }, [sections]);
 
   if (!profileData) {

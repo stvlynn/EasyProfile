@@ -24,6 +24,31 @@ export function Section({ children, className = '' }: SectionProps) {
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (containerRef.current) {
+      (e.currentTarget as any).touchStartY = e.touches[0].clientY;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (containerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+      const atBottom = scrollTop + clientHeight >= scrollHeight;
+      const atTop = scrollTop === 0;
+      
+      const touch = e.touches[0];
+      const deltaY = touch.clientY - (e.currentTarget as any).touchStartY || 0;
+      
+      if (deltaY < 0 && !atBottom) {
+        e.stopPropagation();
+      } else if (deltaY > 0 && !atTop) {
+        e.stopPropagation();
+      }
+      
+      (e.currentTarget as any).touchStartY = touch.clientY;
+    }
+  };
+
   return (
     <motion.section
       variants={fadeInUp}
