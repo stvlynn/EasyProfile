@@ -19,6 +19,16 @@ meta:
   title: "Steven Lynn - AI Developer & Photographer"
   description: "Personal portfolio of Steven Lynn, an AI developer and amateur landscape photographer."
   favicon: "/avatar.jpg"
+  # 简历导出功能配置
+  resumeExport:
+    enabled: true     # 是否启用导出按钮
+    sections:         # 控制导出到简历中的内容
+      profile: true   # 个人信息
+      experiences: true # 工作经历
+      education: true # 教育经历
+      projects: true  # 项目经验
+      techStacks: true # 技术栈
+      intro: false    # 个人介绍（默认不导出）
 
 sections:
   profile: 1

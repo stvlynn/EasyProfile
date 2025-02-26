@@ -1,4 +1,5 @@
-import { IconName } from 'lucide-react';
+// 声明自己的IconName类型，不再从lucide-react导入
+export type IconName = string;
 
 export interface IconConfig {
   icon: IconName;

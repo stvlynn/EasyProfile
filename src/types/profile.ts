@@ -40,7 +40,8 @@ export interface Profile {
   avatar: string;
   tagline: string;
   email: string;
-  links: SocialMedia[];
+  links?: SocialMedia[];
+  socialMedia?: SocialMedia[];
 }
 
 export interface ProfileData {

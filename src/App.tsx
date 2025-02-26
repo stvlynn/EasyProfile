@@ -8,13 +8,26 @@ import { ProjectsSection } from './components/ProjectsSection';
 import { ExperiencesSection } from './components/ExperiencesSection';
 import { TechStacksSection } from './components/TechStacksSection';
 import { EducationSection } from './components/EducationSection';
+import { ResumeExportButton } from './components/ResumeExportButton';
 
 // 扩展 ProfileData 接口以包含 YAML 中实际使用的属性
-interface ExtendedProfileData extends ProfileData {
+export interface ExtendedProfileData extends ProfileData {
   meta?: {
     title: string;
     favicon: string;
     description: string;
+    resumeExport?: {
+      enabled: boolean;
+      sections: {
+        profile?: boolean;
+        experiences?: boolean;
+        education?: boolean;
+        projects?: boolean;
+        techStacks?: boolean;
+        intro?: boolean;
+      };
+      label?: string;
+    };
   };
   sections?: Record<string, number>;
 }
@@ -160,6 +173,8 @@ function App() {
 
   return (
     <div className="relative bg-gray-900">
+      {profileData && <ResumeExportButton profileData={profileData} />}
+      
       {renderSection(sections[currentSection])}
       
       <div className="fixed left-8 top-1/2 -translate-y-1/2">

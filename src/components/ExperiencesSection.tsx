@@ -30,11 +30,11 @@ export function ExperiencesSection({ experiences }: ExperiencesSectionProps) {
             >
               <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
                 {exp.image && (
-                  <div className="relative shrink-0 w-full md:w-32 h-32 overflow-hidden rounded-2xl">
+                  <div className="relative shrink-0 w-24 h-24 md:w-32 md:h-32 overflow-hidden rounded-2xl flex items-center justify-center">
                     <img
                       src={exp.image}
                       alt={exp.company}
-                      className="w-full h-full object-cover transform group-hover:scale-105 
+                      className="w-full h-full object-contain transform group-hover:scale-105 
                         transition-transform duration-500 ease-out"
                     />
                     <div className="absolute inset-0 ring-1 ring-accent-500/30 
