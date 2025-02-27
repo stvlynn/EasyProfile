@@ -78,7 +78,7 @@ profile:
     - platform: GitHub
       url: https://github.com/stvlynn
     - platform: Twitter
-      url: https://twitter.com/stvlynn
+      url: https://twitter.com/stv_lynn
     - platform: LinkedIn
       url: https://www.linkedin.com/in/hongyi-ling-420346285
 
@@ -100,7 +100,7 @@ profile:
       type: twitter
       title: Twitter
       description: Follow me on Twitter
-      username: stvlynn
+      username: stv_lynn
       size: medium
     
     # Blog Link Card
