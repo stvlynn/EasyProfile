@@ -53,6 +53,11 @@ function App() {
   const [sections, setSections] = useState<string[]>([]);
   const touchStartY = useRef<number | null>(null);
   const easterEggsLoaded = useRef<boolean>(false);
+  const scrollCooldown = useRef<boolean>(false);
+  const scrollThreshold = useRef<number>(0);
+  const scrollAccumulator = useRef<number>(0);
+  const wheelAccumulator = useRef<number>(0);
+  const lastScrollTime = useRef<number>(0);
 
   // 加载彩蛋内容
   const loadEasterEgg = async (eggPath: string): Promise<string> => {
@@ -168,46 +173,85 @@ function App() {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      // 如果事件已被处理（被 Section 组件阻止了冒泡），则不执行翻页操作
-      if (e.defaultPrevented || !sections.length) return;
+      if (e.defaultPrevented || !sections.length || scrollCooldown.current) return;
       
-      if (e.deltaY > 0) {
-        setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1));
-      } else {
-        setCurrentSection((prev) => Math.max(prev - 1, 0));
+      const now = Date.now();
+      const timeDelta = now - lastScrollTime.current;
+      
+      if (timeDelta > 500) {
+        wheelAccumulator.current = 0;
       }
-    };
-
-    const handleTouchStart = (e: TouchEvent) => {
-      // 不再调用 preventDefault，避免阻止所有触摸交互
-      // 只保存开始触摸位置
-      const touch = e.touches[0];
-      touchStartY.current = touch.clientY;
-    };
-  
-    const handleTouchMove = (e: TouchEvent) => {
-      // 如果事件已被处理（被 Section 组件阻止了冒泡），则不执行翻页操作
-      if (e.defaultPrevented || !sections.length || touchStartY.current === null) return;
-  
-      const touch = e.touches[0];
-      const deltaY = touchStartY.current - touch.clientY;
-      const threshold = 50; // 增大滑动阈值，以便区分内容滚动和页面翻页
-  
-      if (Math.abs(deltaY) > threshold) {
-        if (deltaY > 0) {
+      
+      wheelAccumulator.current += Math.sign(e.deltaY) * Math.min(Math.abs(e.deltaY) * 0.5, 50);
+      
+      lastScrollTime.current = now;
+      
+      const threshold = Math.max(100, 200 - timeDelta * 0.2);
+      
+      if (Math.abs(wheelAccumulator.current) > threshold) {
+        if (wheelAccumulator.current > 0) {
           setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1));
         } else {
           setCurrentSection((prev) => Math.max(prev - 1, 0));
         }
-        touchStartY.current = null;
+        
+        wheelAccumulator.current = 0;
+        
+        scrollCooldown.current = true;
+        setTimeout(() => {
+          scrollCooldown.current = false;
+        }, 800);
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      touchStartY.current = touch.clientY;
+      scrollAccumulator.current = 0;
+    };
+  
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.defaultPrevented || !sections.length || touchStartY.current === null || scrollCooldown.current) return;
+  
+      const touch = e.touches[0];
+      const deltaY = touchStartY.current - touch.clientY;
+      
+      scrollAccumulator.current += deltaY * 0.3;
+      
+      touchStartY.current = touch.clientY;
+      
+      const touchThreshold = 120;
+  
+      if (Math.abs(scrollAccumulator.current) > touchThreshold) {
+        if (scrollAccumulator.current > 0) {
+          setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1));
+        } else {
+          setCurrentSection((prev) => Math.max(prev - 1, 0));
+        }
+        
+        scrollAccumulator.current = 0;
+        
+        scrollCooldown.current = true;
+        setTimeout(() => {
+          scrollCooldown.current = false;
+        }, 800);
       }
     };
   
     const handleTouchEnd = () => {
       touchStartY.current = null;
+      if (Math.abs(scrollAccumulator.current) > 0) {
+        const inertiaInterval = setInterval(() => {
+          scrollAccumulator.current *= 0.9;
+          if (Math.abs(scrollAccumulator.current) < 10) {
+            scrollAccumulator.current = 0;
+            clearInterval(inertiaInterval);
+          }
+        }, 50);
+      }
     };
   
-    window.addEventListener('wheel', handleWheel);
+    window.addEventListener('wheel', handleWheel, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleTouchEnd);
