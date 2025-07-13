@@ -35,6 +35,51 @@ meta:
       techStacks: true # Technical skills
       intro: false    # Introduction (disabled by default)
   
+  # Theme Configuration
+  themes:
+    current: "midnight"  # Current active theme
+    available:
+      - id: "midnight"
+        name: "Midnight Dark"
+        description: "Deep dark theme with blue accents"
+        colors:
+          background: "bg-gray-900"
+          surface: "bg-gray-800"
+          text: "text-white"
+          textSecondary: "text-gray-300"
+          accent: "text-blue-400"
+          border: "border-gray-700"
+      - id: "twilight"
+        name: "Twilight Purple"
+        description: "Dark theme with purple accents"
+        colors:
+          background: "bg-slate-900"
+          surface: "bg-slate-800"
+          text: "text-white"
+          textSecondary: "text-slate-300"
+          accent: "text-purple-400"
+          border: "border-slate-700"
+      - id: "forest"
+        name: "Forest Green"
+        description: "Dark theme with green accents"
+        colors:
+          background: "bg-emerald-900"
+          surface: "bg-emerald-800"
+          text: "text-white"
+          textSecondary: "text-emerald-100"
+          accent: "text-green-400"
+          border: "border-emerald-700"
+      - id: "minimal"
+        name: "minimal"
+        description: "Pure minimalist design with clean white background"
+        colors:
+          background: "bg-white"
+          surface: "bg-gray-50"
+          text: "text-gray-900"
+          textSecondary: "text-gray-500"
+          accent: "text-gray-800"
+          border: "border-gray-200"
+
   # Easter Egg Configuration
   # Hidden features that can be triggered in specific ways
   easterEggs:
@@ -107,7 +152,7 @@ profile:
     # Links to personal blog with preview image
     - id: blog-link
       type: link
-      title: My Blog
+      title: Steven Lynn's Blog
       description: Personal tech blog
       url: https://blog.stv.pm
       image: https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d
@@ -117,12 +162,12 @@ profile:
     # Shows current location on an interactive map
     - id: location-suzhou
       type: map
-      title: Works in Suzhou
+      title: Works in Shenzhen
       description: Current location
-      location: Suzhou, China
+      location: Shenzhen, China
       coordinates:
-        lat: 31.2989
-        lng: 120.5853
+        lat: 22.533
+        lng: 114.083
       size: small
     
     # Location Card - Nanjing
@@ -220,9 +265,15 @@ projects:
 experiences:
   - company: Dify
     position: Community Operations Associate
-    period: 2024.9 - Present
+    period: 2024.9 - 2025.6
     description: Building usecases for Dify. Maintaining community health and growth.
     image: /experiences/dify.png
+
+  - company: Tencent Cloud
+    position: Product Operations
+    period: 2025.6 - Present
+    description: Developing product growth plans and creating best practices for the agent platform.
+    image: /experiences/tencentcloud-color.svg
 
 # Technical Skills Section
 # Skills and proficiency levels (0-3)

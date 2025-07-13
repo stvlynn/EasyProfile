@@ -9,6 +9,9 @@ import { ExperiencesSection } from './components/ExperiencesSection';
 import { TechStacksSection } from './components/TechStacksSection';
 import { EducationSection } from './components/EducationSection';
 import { ResumeExportButton } from './components/ResumeExportButton';
+import { ThemeProvider, ThemeConfig, useTheme } from './contexts/ThemeContext';
+import { ThemeToggle } from './components/ThemeToggle';
+import { MinimalLayout } from './components/MinimalLayout';
 
 // 彩蛋类型定义
 interface EasterEgg {
@@ -41,6 +44,7 @@ export interface ExtendedProfileData extends ProfileData {
       };
       label?: string;
     };
+    themes?: ThemeConfig;
     easterEggs?: EasterEggsConfig;
   };
   sections?: Record<string, number>;
@@ -291,56 +295,104 @@ function App() {
     }
   };
 
-  return (
-    <div className="relative bg-gray-900">
-      {/* 移除固定定位容器，分别为两个按钮设置位置 */}
-      
-      {/* GitHub Star 按钮 */}
-      <a
-        href="https://github.com/stvlynn/EasyProfile"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed top-4 right-16 z-50 flex items-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg shadow-lg transition-colors duration-300"
-      >
-        <Github size={18} className="mr-2" />
-        <span className="text-sm font-medium">Star</span>
-      </a>
-      
-      {/* 导出简历按钮 */}
-      {profileData && 
-        <div className="fixed top-4 right-4 z-50">
-          <ResumeExportButton profileData={profileData} />
+  const AppContent = () => {
+    const { currentTheme, isLoading } = useTheme();
+    
+    // 防止在主题还在加载时渲染错误的布局
+    if (isLoading || !currentTheme) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-900">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
         </div>
-      }
-      
-      {renderSection(sections[currentSection])}
-      
-      <div className="fixed left-8 top-1/2 -translate-y-1/2">
-        <div className="flex flex-col gap-2">
-          {sections.map((section, index) => (
-            <button
-              key={section}
-              onClick={() => setCurrentSection(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                currentSection === index
-                  ? 'bg-blue-500 scale-150'
-                  : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-            />
-          ))}
+      );
+    }
+    
+    // 如果是极简主题，使用完全不同的布局
+    if (currentTheme.id === 'minimal') {
+      return (
+        <div className="relative">
+          {/* 主题切换按钮 - 极简风格 */}
+          <div className="fixed top-4 right-4 z-50">
+            <ThemeToggle />
+          </div>
+          
+          {/* 极简布局 */}
+          <MinimalLayout 
+            profileData={profileData!} 
+            introContent={introContent} 
+          />
         </div>
-      </div>
+      );
+    }
 
-      {currentSection < sections.length - 1 && (
-        <button
-          onClick={() => setCurrentSection(prev => prev + 1)}
-          className="fixed bottom-8 left-1/2 -translate-x-1/2 text-gray-400 hover:text-gray-300 animate-bounce"
+    // 默认的深色主题布局
+    return (
+      <div className="relative bg-gray-900">
+        {/* GitHub Star 按钮 */}
+        <a
+          href="https://github.com/stvlynn/EasyProfile"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed top-4 right-32 z-50 flex items-center bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 rounded-lg shadow-lg transition-colors duration-300"
         >
-          <ChevronDown size={32} />
-        </button>
-      )}
-    </div>
-  );
+          <Github size={18} className="mr-2" />
+          <span className="text-sm font-medium">Star</span>
+        </a>
+        
+        {/* 主题切换按钮 */}
+        <div className="fixed top-4 right-16 z-50">
+          <ThemeToggle />
+        </div>
+        
+        {/* 导出简历按钮 */}
+        {profileData && 
+          <div className="fixed top-4 right-4 z-50">
+            <ResumeExportButton profileData={profileData} />
+          </div>
+        }
+        
+        {renderSection(sections[currentSection])}
+        
+        <div className="fixed left-8 top-1/2 -translate-y-1/2">
+          <div className="flex flex-col gap-2">
+            {sections.map((section, index) => (
+              <button
+                key={section}
+                onClick={() => setCurrentSection(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  currentSection === index
+                    ? 'bg-blue-500 scale-150'
+                    : 'bg-gray-600 hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {currentSection < sections.length - 1 && (
+          <button
+            onClick={() => setCurrentSection(prev => prev + 1)}
+            className="fixed bottom-8 left-1/2 -translate-x-1/2 text-gray-400 hover:text-gray-300 animate-bounce"
+          >
+            <ChevronDown size={32} />
+          </button>
+        )}
+      </div>
+    );
+  };
+
+  const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
+    if (profileData?.meta?.themes) {
+      return (
+        <ThemeProvider themeConfig={profileData.meta.themes}>
+          <AppContent />
+        </ThemeProvider>
+      );
+    }
+    return <AppContent />;
+  };
+
+  return <ThemeWrapper>{null}</ThemeWrapper>;
 }
 
 export default App;
